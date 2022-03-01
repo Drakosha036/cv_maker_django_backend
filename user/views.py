@@ -42,9 +42,14 @@ def login(request):
 def helloworld(request):
     print(request.user)
     print(request.user.password)
-    code,response = Users.get(request.user)
+    code,response = Users.getProfil(request.user)
+    print(response)
+    if not response['isAdmin']:
+        return Response({'message': 'tu n est pas admin'},
+                    status=HTTP_400_BAD_REQUEST)
     return Response({'message': str(response)},
                     status=HTTP_200_OK)
+
 
 
 
@@ -63,3 +68,15 @@ def register(request):
     else:
         return Response({'message': message},
                         status=HTTP_400_BAD_REQUEST) 
+
+
+
+@csrf_exempt
+@api_view(["GET"])
+@permission_classes((IsAuthenticated,))
+def getProfil(request):
+    print(request.user)
+    print(request.user.password)
+    code,response = Users.getProfil(request.user)
+    return Response({'message': str(response)},
+                    status=HTTP_200_OK)

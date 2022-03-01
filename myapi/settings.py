@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+'''CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
 CORS_ORIGINS_ALLOW_ALL = True
 #CORS_ALLOW_CREDENTIALS = False
 
@@ -49,6 +49,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
     'http://localhost:8000'
 )
+'''
 
 # Application definition
 
@@ -63,14 +64,16 @@ INSTALLED_APPS = [
     # Third-Party Apps
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',
+    #'corsheaders',
 
     # Local Apps (Your project's apps)
     'user',
+    'softskill',
+    'hardskill',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

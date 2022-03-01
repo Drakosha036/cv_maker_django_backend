@@ -22,6 +22,7 @@ class Users(User):
                         last_name = json['last_name'] ,
                         email = json['email'] ,
                         password = json['password'] ,
+                        IsAdminUser = True,
                         )
             user.save()
             print('user', user, user.password)
@@ -35,8 +36,16 @@ class Users(User):
         print(u)
         return u
 
-    def get(user):
-        response = Users.objects.filter(username = user.username)
-        print(response)
-        return 200, response
+    def getProfil(user):
+        response = Users.objects.get(username = user.username)
+        print(response.getjson())
+        return 200, response.getjson()
 
+    def getjson(self):
+        res = {
+            'username' : self.username,
+            'firstname' : self.first_name,
+            'lastname': self.last_name,
+            'isAdmin' : self.IsAdminUser
+        }
+        return res
