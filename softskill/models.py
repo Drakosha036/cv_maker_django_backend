@@ -3,13 +3,13 @@ from django.db.models.fields import CharField
 
 # Create your models here.
 
-class Softskill(models):
+class Softskill(models.Model):
     name = CharField(max_length= 30)
     description = CharField(max_length= 500)
 
     def create(json):
         try:
-            softskill = Softskill.create(
+            softskill = Softskill.objects.create(
                 name = json['name'],
                 description = json['description'],
             )
@@ -29,6 +29,6 @@ class Softskill(models):
 
 
     def getSoftskill(softskill):
-        response = Softskill.get(name = softskill.name)
+        response = Softskill.objects.get(name = softskill.name)
         print(response.getjson())
         return 200, response.getjson()
