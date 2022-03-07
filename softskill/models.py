@@ -9,10 +9,12 @@ class Softskill(models.Model):
 
     def create(json):
         try:
+            print("Data",json)
             softskill = Softskill.objects.create(
                 name = json['name'],
                 description = json['description'],
             )
+            print(softskill)
             softskill.save()
             print('softskill', softskill, softskill.name)
             return 200, 'Softskill registered'
@@ -28,7 +30,21 @@ class Softskill(models.Model):
         return res
 
 
-    def getSoftskill(softskill):
-        response = Softskill.objects.get(name = softskill.name)
-        print(response.getjson())
-        return 200, response.getjson()
+    def getSoftskill(param):
+        response = Softskill.objects.filter(name = param)
+        print(response)
+        res =[]
+        for i in response:
+            res.append(i.getjson())
+        print(res)
+        return 200, res
+
+
+    def getAllSoftskill():
+        response = Softskill.objects.all()
+        print(response)
+        res =[]
+        for i in response:
+            res.append(i.getjson())
+        print(res)
+        return 200, res

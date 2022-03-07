@@ -30,7 +30,17 @@ def register(request):
 @api_view(["GET"])
 @permission_classes((IsAuthenticated,))
 def getHardskill(request):
-    print(request.hardskill)
-    print(request.hardskill.name)
-    code, response = Hardskill.getHardskill(request.hardskill)
+    print(request.query_params)
+    if request.query_params.get("name"):
+        code, response = Hardskill.getHardskill(request.query_params.get("name"))
+    else:
+        code, response = Hardskill.getAllSoftskill()
     return Response({'message': str(response)}, status=HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(["GET"])
+@permission_classes((IsAuthenticated,))
+def getAllHardskill(request):
+    code, response = Hardskill.getAllHardskill()
+    return Response({'message' : str(response)}, status=HTTP_200_OK)

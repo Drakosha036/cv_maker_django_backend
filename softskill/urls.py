@@ -3,5 +3,6 @@ from  . import views
 
 urlpatterns = [
     path('register', views.register),
-    path(r'getSoftskill', views.getSoftskill), #pourquoi r?
+    path(r'getAllSoftskill', views.getAllSoftskill),
+    path(r'getSoftskill', views.getSoftskill), #r = expression reguliere, facultative
 ]

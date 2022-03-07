@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.fields import CharField
+from django.http import response
 
 # Create your models here.
 
@@ -15,7 +16,7 @@ class Hardskill(models.Model):
             )
             hardskill.save()
             print('hardskill', hardskill, hardskill.name)
-            return 200, 'Softskill registered'
+            return 200, 'Hardskill registered'
         except Exception as e:
             return 400, str(e)
 
@@ -28,7 +29,20 @@ class Hardskill(models.Model):
         return res
 
 
-    def getHardskill(hardskill):
-        response = Hardskill.objects.get(name = hardskill.name)
-        print(response.getjson())
-        return 200, response.getjson()
+    def getHardskill(param):
+        response = Hardskill.objects.filter(name = param)
+        print(response)
+        res =[]
+        for i in response:
+            res.append(i.getjson())
+        print(res)
+        return 200, res
+
+    def getAllHardskill():
+        response = Hardskill.objects.all()
+        print(response)
+        res =[]
+        for i in response:
+            res.append(i.getjson())
+        print(res)
+        return 200, res
